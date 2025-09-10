@@ -1,136 +1,152 @@
-/* General body styling */
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* Body styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif; /* Modern font */
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    background-color: #f4faff;
+    background-color: #f8fbff;
     color: #333;
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* Smooth scrolling */
 }
 
-/* Header styling */
+/* Header and nav */
 header {
-    background: #2e86de;
+    background: linear-gradient(135deg, #2e86de, #1b4f72); /* Gradient header */
     color: white;
-    padding: 20px;
+    padding: 25px 20px;
     text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Subtle shadow */
 }
 
 nav a {
     color: white;
-    margin: 0 10px;
+    margin: 0 12px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    color: #d6eaf8; /* Hover effect */
 }
 
-/* Section styling */
+/* Section cards */
 section {
-    padding: 30px 20px;
-    margin: 20px;
-    background: #eaf2fb;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 40px 25px;
+    margin: 25px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    max-width: 1000px;
 }
 
 /* Headings */
 h2 {
     color: #2e86de;
+    margin-bottom: 15px;
+    font-weight: 600;
 }
 
-/* Introduction image styling */
+/* Intro image */
 .intro-image {
     width: 100%;
-    max-width: 700px;
-    height: auto;
+    max-width: 750px;
     border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-    margin: 20px 0;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    margin: 25px 0;
     transition: transform 0.3s ease-in-out;
 }
 
 .intro-image:hover {
-    transform: scale(1.02);
+    transform: scale(1.03); /* Hover zoom */
 }
 
-/* Table styling for AI Tools */
+/* AI Tools table */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-    background: white;
-    border-radius: 8px;
+    margin: 25px 0;
+    background: #ffffff;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 th {
     background: #2e86de;
     color: white;
-    padding: 12px;
+    padding: 14px;
     text-align: left;
 }
 
 td {
-    padding: 12px;
+    padding: 14px;
+    border-bottom: 1px solid #eee;
 }
 
 tr:hover {
-    background-color: #d6eaf8;
+    background-color: #f0f7ff; /* Highlight row */
 }
 
 /* Tool icons */
 .tool-icon {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
+    margin-right: 10px;
     vertical-align: middle;
-    margin-right: 8px;
 }
 
-/* Form styling */
+/* Form */
 form {
-    max-width: 500px;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 550px;
+    margin-top: 25px;
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+form label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 6px;
 }
 
 form input, form select {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 18px;
+    border-radius: 8px;
     border: 1px solid #ccc;
 }
 
+/* Submit button */
 form button {
     width: 100%;
     background: #2e86de;
     color: white;
-    padding: 12px;
+    padding: 14px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 17px;
+    font-weight: 600;
+    transition: background 0.3s;
 }
 
 form button:hover {
     background: #1b4f72;
 }
 
-/* Footer styling */
+/* Footer */
 footer {
     text-align: center;
-    padding: 15px;
-    background: #2e86de;
+    padding: 18px;
+    background: linear-gradient(135deg, #2e86de, #1b4f72);
     color: white;
-    margin-top: 20px;
+    margin-top: 30px;
+    font-size: 14px;
 }
-    
