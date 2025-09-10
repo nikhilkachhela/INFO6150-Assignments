@@ -1,0 +1,136 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: #f4faff;
+    color: #333;
+    scroll-behavior: smooth;
+}
+
+/* Header styling */
+header {
+    background: #2e86de;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Section styling */
+section {
+    padding: 30px 20px;
+    margin: 20px;
+    background: #eaf2fb;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+h2 {
+    color: #2e86de;
+}
+
+/* Introduction image styling */
+.intro-image {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    margin: 20px 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.intro-image:hover {
+    transform: scale(1.02);
+}
+
+/* Table styling for AI Tools */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+th {
+    background: #2e86de;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 12px;
+}
+
+tr:hover {
+    background-color: #d6eaf8;
+}
+
+/* Tool icons */
+.tool-icon {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+/* Form styling */
+form {
+    max-width: 500px;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+form input, form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+form button {
+    width: 100%;
+    background: #2e86de;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:hover {
+    background: #1b4f72;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #2e86de;
+    color: white;
+    margin-top: 20px;
+}
+    
