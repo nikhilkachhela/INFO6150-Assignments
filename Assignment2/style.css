@@ -1,0 +1,133 @@
+/* style.css - mobile-first responsive styles */
+
+/* Variables */
+:root{
+  --brand: #1e66ff;
+  --dark: #0e2431;
+  --muted: #677688;
+  --bg: #ffffff;
+  --card: #f7f9fc;
+  --radius: 10px;
+  --maxwidth: 1100px;
+  --gap: 1.25rem;
+  --shadow: 0 8px 30px rgba(14,36,49,0.08);
+  --font-body: 'Poppins', sans-serif;
+  --font-display: 'Courgette', cursive;
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--dark);
+  background:var(--bg);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.container{max-width:var(--maxwidth);margin:0 auto;padding:1rem;}
+
+/* Accessibility helper */
+.sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+/* Header */
+/* --- Navigation Bar Enhancements --- */
+/* --- Navigation Bar Enhancements --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: linear-gradient(90deg, #1e66ff 60%, #00c6fb 100%);
+  border-bottom: none;
+  box-shadow: 0 2px 12px rgba(30,102,255,0.08);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .75rem 0;
+}
+
+.brand {
+  font-family: 'Poppins', sans-serif; /* Use modern font */
+  font-size: 1.25rem;                 /* Smaller, clean size */
+  color: #fff;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(30,102,255,0.10);
+  transition: color 0.2s;
+}
+
+.brand:hover {
+  color: #ffd700;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+@media (min-width:600px){
+  .nav-list {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+.nav-link {
+  display: block;
+  padding: .5rem 1rem;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: #ffd700;
+  border-radius: 2px;
+  transition: width .3s;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.12);
+  color: #ffd700;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* --- Profile Image Enhancements --- */
+.profile-image {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 30px rgba(30,102,255,0.18);
+  border: 4px solid #fff;
+  background: linear-gradient(135deg, #e3f2fd 0%, #f7fafd 100%);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.profile-image:hover {
+  box-shadow: 0 16px 40px rgba(30,102,255,0.28);
+  transform: scale(1.04);
+}
