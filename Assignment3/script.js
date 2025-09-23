@@ -61,4 +61,61 @@ document.addEventListener("DOMContentLoaded", () => {
       if (checkbox.checked) {
         row.classList.add("yellow-row");
 
+        // Add Delete + Edit buttons
+        deleteCell.innerHTML = `<button class="btn btn-delete">Delete</button>`;
+        editCell.innerHTML = `<button class="btn btn-edit">Edit</button>`;
 
+        deleteCell.querySelector("button").addEventListener("click", () => {
+          const studentName = row.cells[1].textContent;
+          row.remove();
+          expandRow.remove();
+          alert(`${studentName} Record deleted successfully`);
+          renumberStudents();
+          updateSubmitButton();
+        });
+
+        editCell.querySelector("button").addEventListener("click", () => {
+          const studentName = row.cells[1].textContent;
+          const newData = prompt(`Edit details of ${studentName}:`, "");
+          if (newData && newData.trim() !== "") {
+            alert(`${studentName} data updated successfully`);
+          }
+        });
+
+      } else {
+        row.classList.remove("yellow-row");
+        deleteCell.innerHTML = "";
+        editCell.innerHTML = "";
+      }
+      updateSubmitButton();
+    });
+
+    // Expand/Collapse
+    arrow.addEventListener("click", () => {
+      if (expandRow.classList.contains("collapsed")) {
+        expandRow.classList.remove("collapsed");
+        expandRow.classList.add("expanded");
+        arrow.style.transform = "rotate(90deg)";
+      } else {
+        expandRow.classList.remove("expanded");
+        expandRow.classList.add("collapsed");
+        arrow.style.transform = "rotate(0deg)";
+      }
+    });
+  }
+
+  function renumberStudents() {
+    const rows = studentTable.querySelectorAll("tr");
+    let number = 1;
+    rows.forEach((row, index) => {
+      if (row.cells.length > 1) {
+        row.cells[1].textContent = `Student ${number}`;
+        row.cells[2].textContent = `Teacher ${number}`;
+        number++;
+      }
+    });
+    studentCount = number - 1;
+  }
+
+  addStudentBtn.addEventListener("click", addStudent);
+});
