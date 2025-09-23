@@ -1,0 +1,61 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+h2 {
+  margin-bottom: 20px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+th {
+  background: #f0f0f0;
+}
+.yellow-row {
+  background-color: yellow;
+}
+.btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-add {
+  background: green;
+  color: white;
+}
+.btn-submit {
+  background: gray;
+  color: white;
+  margin-left: 10px;
+  cursor: not-allowed;
+}
+.btn-submit.active {
+  background: orange;
+  cursor: pointer;
+}
+.btn-delete {
+  background: red;
+  color: white;
+}
+.btn-edit {
+  background: blue;
+  color: white;
+}
+.arrow {
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.expanded {
+  display: table-row;
+}
+.collapsed {
+  display: none;
+}
