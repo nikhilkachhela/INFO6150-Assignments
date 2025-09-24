@@ -105,17 +105,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renumberStudents() {
-    const rows = studentTable.querySelectorAll("tr");
-    let number = 1;
-    rows.forEach((row, index) => {
-      if (row.cells.length > 1) {
-        row.cells[1].textContent = `Student ${number}`;
-        row.cells[2].textContent = `Teacher ${number}`;
-        number++;
+  const rows = studentTable.querySelectorAll("tr");
+  let number = 1;
+
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+
+    // Main student rows have at least 5 cells (checkbox + student + teacher + subject + marks...)
+    if (row.cells.length > 1 && row.cells[1].textContent.startsWith("Student")) {
+      row.cells[1].textContent = `Student ${number}`;
+      row.cells[2].textContent = `Teacher ${number}`;
+      row.cells[3].textContent = `Subject ${number}`;
+
+      // Update expandable row (the very next row after this one)
+      const expandRow = rows[i + 1];
+      if (expandRow && expandRow.cells.length === 1) {
+        expandRow.cells[0].textContent = `Extra details for Student ${number}`;
       }
-    });
-    studentCount = number - 1;
+
+      number++;
+    }
   }
+
+  studentCount = number - 1; // keep counter in sync
+}
+
 
   addStudentBtn.addEventListener("click", addStudent);
 });
