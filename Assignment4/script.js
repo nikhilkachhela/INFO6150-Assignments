@@ -1,6 +1,7 @@
 const form = document.getElementById("feedbackForm");
 const submitBtn = document.getElementById("submitBtn");
 
+// Validation rules
 const validators = {
   firstName: val => /^[A-Za-z]{2,30}$/.test(val),
   lastName: val => /^[A-Za-z]{2,30}$/.test(val),
@@ -11,6 +12,7 @@ const validators = {
   listBox: val => val !== ""
 };
 
+// Error messages
 const errors = {
   firstName: "First name must be 2–30 letters",
   lastName: "Last name must be 2–30 letters",
@@ -26,6 +28,7 @@ function showError(id, valid) {
   if (err) err.textContent = valid ? "" : errors[id];
 }
 
+// Phone formatting
 function formatPhone(input) {
   let val = input.value.replace(/\D/g, "");
   if (val.length > 3 && val.length <= 6)
@@ -36,6 +39,7 @@ function formatPhone(input) {
     input.value = val;
 }
 
+// Attach live validation
 ["firstName", "lastName", "email", "phone", "zip", "addr1"].forEach(id => {
   document.getElementById(id).addEventListener("input", () => {
     if (id === "phone") formatPhone(document.getElementById("phone"));
@@ -45,6 +49,7 @@ function formatPhone(input) {
   });
 });
 
+// Dropdown logic
 document.getElementById("listBox").addEventListener("change", e => {
   let valid = validators.listBox(e.target.value);
   showError("listBox", valid);
@@ -72,10 +77,12 @@ document.getElementById("listBox").addEventListener("change", e => {
   checkForm();
 });
 
+// Address2 counter
 document.getElementById("addr2").addEventListener("input", e => {
   document.getElementById("counter").textContent = `${e.target.value.length}/20`;
 });
 
+// Enable submit only if all valid
 function checkForm() {
   let allValid = ["firstName", "lastName", "email", "phone", "zip", "addr1"].every(id =>
     validators[id](document.getElementById(id).value)
@@ -83,6 +90,7 @@ function checkForm() {
   submitBtn.disabled = !allValid;
 }
 
+// Submit
 form.addEventListener("submit", e => {
   e.preventDefault();
   const table = document.getElementById("resultsTable");
@@ -111,12 +119,15 @@ form.addEventListener("submit", e => {
   submitBtn.disabled = true;
 });
 
-// Chatbot
+// Chatbot logic
 const chatBtn = document.getElementById("chatbot");
 const chatWin = document.getElementById("chatWindow");
 const chatMsgs = document.getElementById("chatMessages");
 const sendBtn = document.getElementById("sendBtn");
 const chatInput = document.getElementById("chatInput");
+
+// make sure it's hidden on load
+chatWin.style.display = "none";
 
 const faqs = {
   email: "You must use your Northeastern email (example: student@northeastern.edu).",
@@ -126,18 +137,37 @@ const faqs = {
   address: "Street Address 2 is optional."
 };
 
+// toggle open/close
 chatBtn.addEventListener("click", () => {
-  chatWin.style.display = chatWin.style.display === "block" ? "none" : "block";
+  if (chatWin.style.display === "flex") {
+    chatWin.style.display = "none";   // close
+  } else {
+    chatWin.style.display = "flex";   // open
+  }
 });
 
+// Chat send with styled bubbles
 sendBtn.addEventListener("click", () => {
-  let q = chatInput.value.toLowerCase();
-  let ans = "Sorry, I don’t know that yet.";
+  let q = chatInput.value.trim();
+  if (!q) return;
+
+  // User bubble
+  let userMsg = document.createElement("div");
+  userMsg.className = "chat-user";
+  userMsg.textContent = q;
+  chatMsgs.appendChild(userMsg);
+
+  // Bot response
+  let ans = "Sorry, I don’t know that yet. Please check the instructions.";
   for (const key in faqs) {
-    if (q.includes(key)) { ans = faqs[key]; break; }
+    if (q.toLowerCase().includes(key)) { ans = faqs[key]; break; }
   }
-  chatMsgs.innerHTML += `<div><b>You:</b> ${chatInput.value}</div>`;
-  chatMsgs.innerHTML += `<div><b>Bot:</b> ${ans}</div>`;
+
+  let botMsg = document.createElement("div");
+  botMsg.className = "chat-bot";
+  botMsg.textContent = ans;
+  chatMsgs.appendChild(botMsg);
+
   chatInput.value = "";
   chatMsgs.scrollTop = chatMsgs.scrollHeight;
 });
