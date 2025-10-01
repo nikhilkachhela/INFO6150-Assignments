@@ -3,24 +3,26 @@ const submitBtn = document.getElementById("submitBtn");
 
 // Validation rules
 const validators = {
-  firstName: val => /^[A-Za-z]{2,30}$/.test(val),
-  lastName: val => /^[A-Za-z]{2,30}$/.test(val),
+  firstName: val => /^[A-Za-z0-9]{2,30}$/.test(val),
+  lastName: val => /^[A-Za-z0-9]{2,30}$/.test(val),
   email: val => /^[A-Za-z0-9._%+-]+@northeastern\.edu$/.test(val),
   phone: val => /^\(\d{3}\) \d{3}-\d{4}$/.test(val),
   zip: val => /^\d{5}$/.test(val),
   addr1: val => val.trim().length > 0,
-  listBox: val => val !== ""
+  listBox: val => val !== "",
+  extraTxt: val => val.trim().length > 0 // ✅ new: dynamic field check
 };
 
 // Error messages
 const errors = {
-  firstName: "First name must be 2–30 letters",
-  lastName: "Last name must be 2–30 letters",
+  firstName: "First name must be 2–30 letters/numbers",
+  lastName: "Last name must be 2–30 letters/numbers",
   email: "Must use Northeastern email",
   phone: "Format: (XXX) XXX-XXXX",
   zip: "Must be 5 digits",
   addr1: "Street Address 1 is required",
-  listBox: "Please select an option"
+  listBox: "Please select an option",
+  extraTxt: "This field is required" // ✅ new error msg
 };
 
 function showError(id, valid) {
@@ -67,11 +69,21 @@ document.getElementById("listBox").addEventListener("change", e => {
       if (ev.target.checked) {
         let txt = document.createElement("input");
         txt.type = "text"; txt.id = "extraTxt"; txt.required = true;
+        let errSpan = document.createElement("span");
+        errSpan.id = "extraTxtErr"; errSpan.className = "error";
         area.appendChild(document.createElement("br"));
         area.appendChild(txt);
+        area.appendChild(errSpan);
+
+        txt.addEventListener("input", () => {
+          let valid = validators.extraTxt(txt.value);
+          showError("extraTxt", valid);
+          checkForm();
+        });
       } else {
-        area.querySelectorAll("input[type=text]").forEach(el => el.remove());
+        area.innerHTML = "";
       }
+      checkForm();
     });
   }
   checkForm();
@@ -87,6 +99,12 @@ function checkForm() {
   let allValid = ["firstName", "lastName", "email", "phone", "zip", "addr1"].every(id =>
     validators[id](document.getElementById(id).value)
   ) && validators.listBox(document.getElementById("listBox").value);
+
+  const extra = document.getElementById("extraTxt");
+  if (extra) {
+    allValid = allValid && validators.extraTxt(extra.value);
+  }
+
   submitBtn.disabled = !allValid;
 }
 
@@ -114,6 +132,13 @@ form.addEventListener("submit", e => {
   });
 
   form.reset();
+  document.getElementById("counter").textContent = "0/20";
+  document.getElementById("dynamicArea").innerHTML = "";
+  submitBtn.disabled = true;
+});
+
+// ✅ FIX: manual reset clears dynamic area + counter
+form.addEventListener("reset", () => {
   document.getElementById("counter").textContent = "0/20";
   document.getElementById("dynamicArea").innerHTML = "";
   submitBtn.disabled = true;
@@ -178,4 +203,3 @@ chatInput.addEventListener("keypress", e => {
     sendBtn.click();
   }
 });
-
