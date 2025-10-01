@@ -171,3 +171,11 @@ sendBtn.addEventListener("click", () => {
   chatInput.value = "";
   chatMsgs.scrollTop = chatMsgs.scrollHeight;
 });
+
+chatInput.addEventListener("keypress", e => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    sendBtn.click();
+  }
+});
+
