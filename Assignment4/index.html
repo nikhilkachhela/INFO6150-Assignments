@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback - Assignment 4</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- AI Assistant Button -->
+<button id="chatbot">🤖 AI Assistant</button>
+<div id="chatWindow">
+  <div id="chatMessages"></div>
+  <input type="text" id="chatInput" placeholder="Ask a question...">
+  <button id="sendBtn">Send</button>
+</div>
+
+<div id="container">
+  <main>
+    <h2>Feedback</h2>
+    <h3>Love something? Hate something? Let us know!</h3>
+    <p>Note: Fields marked with an asterisk (*) are mandatory</p>
+
+    <form id="feedbackForm" novalidate>
+      <label for="firstName">First Name*:</label>
+      <input type="text" id="firstName" placeholder="First Name">
+      <span class="error" id="firstNameErr"></span><br><br>
+
+      <label for="lastName">Last Name*:</label>
+      <input type="text" id="lastName" placeholder="Last Name">
+      <span class="error" id="lastNameErr"></span><br><br>
+
+      <label for="email">Email*:</label>
+      <input type="text" id="email" placeholder="yourname@northeastern.edu">
+      <span class="error" id="emailErr"></span><br><br>
+
+      <label for="phone">Phone Number*:</label>
+      <input type="text" id="phone" placeholder="(XXX) XXX-XXXX" maxlength="14">
+      <span class="error" id="phoneErr"></span><br><br>
+
+      <label for="zip">Zip Code*:</label>
+      <input type="text" id="zip" maxlength="5">
+      <span class="error" id="zipErr"></span><br><br>
+
+      <label for="addr1">Street Address 1*:</label>
+      <input type="text" id="addr1">
+      <span class="error" id="addr1Err"></span><br><br>
+
+      <label for="addr2">Street Address 2:</label>
+      <input type="text" id="addr2" maxlength="20">
+      <span id="counter">0/20</span><br><br>
+
+      <label for="listBox">How did you hear about us?*:</label>
+      <select id="listBox">
+        <option value="">--Select an option--</option>
+        <option value="Google">Google</option>
+        <option value="Facebook">Facebook</option>
+        <option value="Friend">Friend</option>
+        <option value="Advertisement">Advertisement</option>
+        <option value="Other">Other</option>
+      </select>
+      <div id="dynamicArea"></div>
+      <span class="error" id="listErr"></span><br><br>
+
+      <button type="submit" id="submitBtn" disabled>Submit</button>
+      <button type="reset">Reset</button>
+    </form>
+  </main>
+</div>
+
+<h3>Submitted Data</h3>
+<table id="resultsTable">
+  <tr>
+    <th>First Name</th><th>Last Name</th><th>Email</th><th>Phone</th>
+    <th>Zip</th><th>Address1</th><th>Address2</th><th>Source</th><th>Extra</th>
+  </tr>
+</table>
+
+<script src="script.js"></script>
+</body>
+</html>

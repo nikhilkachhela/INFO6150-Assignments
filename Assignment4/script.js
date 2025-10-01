@@ -1,24 +1,29 @@
-const form = document.getElementById('studentForm');
-const submitBtn = document.getElementById('submitBtn');
-const errors = {
-  name: "Name must be 3-30 letters only",
-  email: "Must be Northeastern email (@northeastern.edu)",
-  phone: "Format: (XXX) XXX-XXXX",
-  zip: "Zip must be 5 digits",
-  addr1: "Address 1 is required"
-};
+const form = document.getElementById("feedbackForm");
+const submitBtn = document.getElementById("submitBtn");
 
 const validators = {
-  name: val => /^[A-Za-z ]{3,30}$/.test(val),
+  firstName: val => /^[A-Za-z]{2,30}$/.test(val),
+  lastName: val => /^[A-Za-z]{2,30}$/.test(val),
   email: val => /^[A-Za-z0-9._%+-]+@northeastern\.edu$/.test(val),
   phone: val => /^\(\d{3}\) \d{3}-\d{4}$/.test(val),
   zip: val => /^\d{5}$/.test(val),
-  addr1: val => val.trim().length > 0
+  addr1: val => val.trim().length > 0,
+  listBox: val => val !== ""
+};
+
+const errors = {
+  firstName: "First name must be 2–30 letters",
+  lastName: "Last name must be 2–30 letters",
+  email: "Must use Northeastern email",
+  phone: "Format: (XXX) XXX-XXXX",
+  zip: "Must be 5 digits",
+  addr1: "Street Address 1 is required",
+  listBox: "Please select an option"
 };
 
 function showError(id, valid) {
   const err = document.getElementById(id + "Err");
-  err.textContent = valid ? "" : errors[id];
+  if (err) err.textContent = valid ? "" : errors[id];
 }
 
 function formatPhone(input) {
@@ -31,7 +36,7 @@ function formatPhone(input) {
     input.value = val;
 }
 
-["name", "email", "phone", "zip", "addr1"].forEach(id => {
+["firstName", "lastName", "email", "phone", "zip", "addr1"].forEach(id => {
   document.getElementById(id).addEventListener("input", () => {
     if (id === "phone") formatPhone(document.getElementById("phone"));
     let valid = validators[id](document.getElementById(id).value);
@@ -40,14 +45,10 @@ function formatPhone(input) {
   });
 });
 
-// Address 2 counter
-document.getElementById("addr2").addEventListener("input", e => {
-  let len = e.target.value.length;
-  document.getElementById("counter").textContent = `${len}/20`;
-});
-
-// Dynamic select + checkbox
 document.getElementById("listBox").addEventListener("change", e => {
+  let valid = validators.listBox(e.target.value);
+  showError("listBox", valid);
+
   const area = document.getElementById("dynamicArea");
   area.innerHTML = "";
   if (e.target.value) {
@@ -68,26 +69,42 @@ document.getElementById("listBox").addEventListener("change", e => {
       }
     });
   }
+  checkForm();
+});
+
+document.getElementById("addr2").addEventListener("input", e => {
+  document.getElementById("counter").textContent = `${e.target.value.length}/20`;
 });
 
 function checkForm() {
-  let allValid = ["name", "email", "phone", "zip", "addr1"].every(id =>
+  let allValid = ["firstName", "lastName", "email", "phone", "zip", "addr1"].every(id =>
     validators[id](document.getElementById(id).value)
-  );
+  ) && validators.listBox(document.getElementById("listBox").value);
   submitBtn.disabled = !allValid;
 }
 
-// Submit
 form.addEventListener("submit", e => {
   e.preventDefault();
   const table = document.getElementById("resultsTable");
   let row = table.insertRow();
-  ["name", "email", "phone", "zip", "addr1", "addr2"].forEach(id => {
+
+  let values = [
+    document.getElementById("firstName").value,
+    document.getElementById("lastName").value,
+    document.getElementById("email").value,
+    document.getElementById("phone").value,
+    document.getElementById("zip").value,
+    document.getElementById("addr1").value,
+    document.getElementById("addr2").value || "",
+    document.getElementById("listBox").value,
+    document.getElementById("extraTxt")?.value || ""
+  ];
+
+  values.forEach(val => {
     let cell = row.insertCell();
-    cell.textContent = document.getElementById(id).value || "";
+    cell.textContent = val;
   });
-  let cell = row.insertCell();
-  cell.textContent = document.getElementById("extraTxt")?.value || "";
+
   form.reset();
   document.getElementById("counter").textContent = "0/20";
   document.getElementById("dynamicArea").innerHTML = "";
@@ -103,19 +120,19 @@ const chatInput = document.getElementById("chatInput");
 
 const faqs = {
   email: "You must use your Northeastern email (example: student@northeastern.edu).",
-  phone: "The phone number must be in the format (XXX) XXX-XXXX.",
-  zip: "The zip code must be exactly 5 digits.",
+  phone: "Phone must be in format (XXX) XXX-XXXX.",
+  zip: "Zip code must be exactly 5 digits.",
   required: "All fields are required except Street Address 2.",
-  address: "Street Address 2 is optional. If left blank, it will remain empty in the results table."
+  address: "Street Address 2 is optional."
 };
 
-chatBtn.addEventListener("click", () =>
-  chatWin.style.display = chatWin.style.display === "block" ? "none" : "block"
-);
+chatBtn.addEventListener("click", () => {
+  chatWin.style.display = chatWin.style.display === "block" ? "none" : "block";
+});
 
 sendBtn.addEventListener("click", () => {
   let q = chatInput.value.toLowerCase();
-  let ans = "Sorry, I don’t know that yet. Please check the instructions.";
+  let ans = "Sorry, I don’t know that yet.";
   for (const key in faqs) {
     if (q.includes(key)) { ans = faqs[key]; break; }
   }
