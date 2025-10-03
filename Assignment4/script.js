@@ -10,7 +10,9 @@ const validators = {
   zip: val => /^\d{5}$/.test(val),
   addr1: val => val.trim().length > 0,
   listBox: val => val !== "",
-  extraTxt: val => val.trim().length > 0 // ✅ new: dynamic field check
+  extraTxt: val => val.trim().length > 0,
+  hear: () => document.querySelector('input[name="hear"]:checked') !== null,
+  comments: val => val.trim().length >= 5
 };
 
 // Error messages
@@ -21,8 +23,10 @@ const errors = {
   phone: "Format: (XXX) XXX-XXXX",
   zip: "Must be 5 digits",
   addr1: "Street Address 1 is required",
-  listBox: "Please select an option",
-  extraTxt: "This field is required" // ✅ new error msg
+  listBox: "Please select a drink",
+  extraTxt: "This field is required",
+  hear: "Please select an option",
+  comments: "Please enter at least 5 characters"
 };
 
 function showError(id, valid) {
@@ -51,7 +55,7 @@ function formatPhone(input) {
   });
 });
 
-// Dropdown logic
+// Drinks dropdown logic
 document.getElementById("listBox").addEventListener("change", e => {
   let valid = validators.listBox(e.target.value);
   showError("listBox", valid);
@@ -94,11 +98,28 @@ document.getElementById("addr2").addEventListener("input", e => {
   document.getElementById("counter").textContent = `${e.target.value.length}/20`;
 });
 
+// Radio buttons validation
+document.querySelectorAll('input[name="hear"]').forEach(radio => {
+  radio.addEventListener("change", () => {
+    let valid = validators.hear();
+    showError("hear", valid);
+    checkForm();
+  });
+});
+
+// Comments validation
+document.getElementById("comments").addEventListener("input", () => {
+  let valid = validators.comments(document.getElementById("comments").value);
+  showError("comments", valid);
+  checkForm();
+});
+
 // Enable submit only if all valid
 function checkForm() {
-  let allValid = ["firstName", "lastName", "email", "phone", "zip", "addr1"].every(id =>
-    validators[id](document.getElementById(id).value)
-  ) && validators.listBox(document.getElementById("listBox").value);
+  let allValid = ["firstName", "lastName", "email", "phone", "zip", "addr1", "comments"].every(id =>
+    validators[id](document.getElementById(id)?.value || "")
+  ) && validators.listBox(document.getElementById("listBox").value)
+    && validators.hear();
 
   const extra = document.getElementById("extraTxt");
   if (extra) {
@@ -114,6 +135,8 @@ form.addEventListener("submit", e => {
   const table = document.getElementById("resultsTable");
   let row = table.insertRow();
 
+  let selectedHear = document.querySelector('input[name="hear"]:checked')?.value || "";
+
   let values = [
     document.getElementById("firstName").value,
     document.getElementById("lastName").value,
@@ -123,7 +146,9 @@ form.addEventListener("submit", e => {
     document.getElementById("addr1").value,
     document.getElementById("addr2").value || "",
     document.getElementById("listBox").value,
-    document.getElementById("extraTxt")?.value || ""
+    selectedHear,
+    document.getElementById("extraTxt")?.value || "",
+    document.getElementById("comments").value
   ];
 
   values.forEach(val => {
@@ -137,21 +162,21 @@ form.addEventListener("submit", e => {
   submitBtn.disabled = true;
 });
 
-// ✅ FIX: manual reset clears dynamic area + counter
+// Reset clears dynamic fields
 form.addEventListener("reset", () => {
   document.getElementById("counter").textContent = "0/20";
   document.getElementById("dynamicArea").innerHTML = "";
   submitBtn.disabled = true;
 });
 
-// Chatbot logic
+// ----------------- Chatbot logic -----------------
 const chatBtn = document.getElementById("chatbot");
 const chatWin = document.getElementById("chatWindow");
 const chatMsgs = document.getElementById("chatMessages");
 const sendBtn = document.getElementById("sendBtn");
 const chatInput = document.getElementById("chatInput");
 
-// make sure it's hidden on load
+// hidden on load
 chatWin.style.display = "none";
 
 const faqs = {
@@ -165,9 +190,9 @@ const faqs = {
 // toggle open/close
 chatBtn.addEventListener("click", () => {
   if (chatWin.style.display === "flex") {
-    chatWin.style.display = "none";   // close
+    chatWin.style.display = "none";
   } else {
-    chatWin.style.display = "flex";   // open
+    chatWin.style.display = "flex";
   }
 });
 
@@ -197,6 +222,7 @@ sendBtn.addEventListener("click", () => {
   chatMsgs.scrollTop = chatMsgs.scrollHeight;
 });
 
+// allow Enter key to send
 chatInput.addEventListener("keypress", e => {
   if (e.key === "Enter") {
     e.preventDefault();

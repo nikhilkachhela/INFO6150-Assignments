@@ -54,17 +54,27 @@
       <input type="text" id="addr2" maxlength="20">
       <span id="counter">0/20</span><br><br>
 
-      <label for="listBox">How did you hear about us?*:</label>
+      <label for="listBox">Select a Drink*:</label>
       <select id="listBox">
-        <option value="">--Select an option--</option>
-        <option value="Google">Google</option>
-        <option value="Facebook">Facebook</option>
-        <option value="Friend">Friend</option>
-        <option value="Advertisement">Advertisement</option>
-        <option value="Other">Other</option>
+        <option value="">--Select a drink--</option>
+        <option value="Coffee">Coffee</option>
+        <option value="Tea">Tea</option>
+        <option value="Juice">Juice</option>
+        <option value="Soda">Soda</option>
+        <option value="Water">Water</option>
       </select>
-      <div id="dynamicArea"></div>
-      <span class="error" id="listErr"></span><br><br>
+    <div id="dynamicArea"></div>
+    <span class="error" id="listErr"></span><br><br>
+
+    <label>How did you hear*:</label>
+    <input type="radio" name="hear" value="Facebook" id="hearFacebook"> Facebook
+    <input type="radio" name="hear" value="Google" id="hearGoogle"> Google
+    <input type="radio" name="hear" value="Yelp" id="hearYelp"> Yelp
+    <span class="error" id="hearErr"></span><br><br>
+
+    <label for="comments">Comments*:</label>
+    <textarea id="comments" rows="4" cols="40" placeholder="Your comments"></textarea>
+    <span class="error" id="commentsErr"></span><br><br>
 
       <button type="submit" id="submitBtn" disabled>Submit</button>
       <button type="reset">Reset</button>
@@ -76,7 +86,8 @@
 <table id="resultsTable">
   <tr>
     <th>First Name</th><th>Last Name</th><th>Email</th><th>Phone</th>
-    <th>Zip</th><th>Address1</th><th>Address2</th><th>Source</th><th>Comments</th>
+    <th>Zip</th><th>Address1</th><th>Address2</th>
+    <th>Drink</th><th>Heard From</th><th>Extra</th><th>Comments</th>
   </tr>
 </table>
 
