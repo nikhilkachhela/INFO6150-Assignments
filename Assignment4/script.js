@@ -11,7 +11,7 @@ const validators = {
   addr1: val => val.trim().length > 0,
   listBox: val => val !== "",
   extraTxt: val => val.trim().length > 0,
-  hear: () => document.querySelector('input[name="hear"]:checked') !== null,
+  hear: () => document.querySelectorAll('input[name="hear"]:checked').length > 0, // ✅ checkboxes
   comments: val => val.trim().length >= 5
 };
 
@@ -25,7 +25,7 @@ const errors = {
   addr1: "Street Address 1 is required",
   listBox: "Please select a drink",
   extraTxt: "This field is required",
-  hear: "Please select an option",
+  hear: "Please select at least one option",
   comments: "Please enter at least 5 characters"
 };
 
@@ -98,9 +98,9 @@ document.getElementById("addr2").addEventListener("input", e => {
   document.getElementById("counter").textContent = `${e.target.value.length}/20`;
 });
 
-// Radio buttons validation
-document.querySelectorAll('input[name="hear"]').forEach(radio => {
-  radio.addEventListener("change", () => {
+// ✅ Checkboxes validation for "hear"
+document.querySelectorAll('input[name="hear"]').forEach(box => {
+  box.addEventListener("change", () => {
     let valid = validators.hear();
     showError("hear", valid);
     checkForm();
@@ -135,7 +135,10 @@ form.addEventListener("submit", e => {
   const table = document.getElementById("resultsTable");
   let row = table.insertRow();
 
-  let selectedHear = document.querySelector('input[name="hear"]:checked')?.value || "";
+  // ✅ Collect multiple "hear" values
+  let selectedHear = Array.from(document.querySelectorAll('input[name="hear"]:checked'))
+                          .map(el => el.value)
+                          .join(", ");
 
   let values = [
     document.getElementById("firstName").value,
