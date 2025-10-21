@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calculator - Assignment 6</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container between">
+      <h2 id="welcome">Welcome!</h2>
+      <button id="logoutBtn" class="btn">Logout</button>
+    </div>
+  </header>
+
+  <main class="container center">
+    <div class="card calculator">
+      <h1>Calculator</h1>
+
+      <label>Number 1</label>
+      <input id="num1" type="text" placeholder="Enter a number" />
+      <div class="error" id="num1Error"></div>
+
+      <label>Number 2</label>
+      <input id="num2" type="text" placeholder="Enter a number" />
+      <div class="error" id="num2Error"></div>
+
+      <div class="row operations">
+        <button class="op" data-op="add">Add</button>
+        <button class="op" data-op="subtract">Subtract</button>
+        <button class="op" data-op="multiply">Multiply</button>
+        <button class="op" data-op="divide">Divide</button>
+      </div>
+
+      <label>Result</label>
+      <input id="result" type="text" readonly />
+
+    </div>
+  </main>
+
+  <script src="js/calculator.js"></script>
+</body>
+</html>
