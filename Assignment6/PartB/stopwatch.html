@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stopwatch - Assignment 6</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <main class="container center">
+    <div class="card" style="max-width:900px;">
+      <h1>Event Stopwatch</h1>
+
+      <div class="center" style="margin:1rem 0;">
+        <div id="timerDisplay" style="font-size:56px;font-weight:700">00:00:00</div>
+      </div>
+
+      <form id="eventForm" class="card" style="padding:1rem;margin-bottom:1rem;">
+        <label for="eventDate">Date</label>
+        <input id="eventDate" type="date" />
+        <div class="error" id="dateError"></div>
+
+        <label for="eventName">Event Name</label>
+        <input id="eventName" type="text" placeholder="What are you timing?" />
+        <div class="error" id="nameError"></div>
+
+        <div class="row" style="margin-top:1rem;">
+          <button id="startBtn" type="button" class="btn">Start</button>
+          <button id="pauseBtn" type="button" class="btn disabled" disabled>Pause</button>
+          <button id="stopBtn" type="button" class="btn disabled" disabled>Stop & Save</button>
+          <button id="resetBtn" type="button" class="btn">Reset</button>
+        </div>
+      </form>
+
+      <div class="card" style="margin-top:1rem;">
+        <div class="between">
+          <h3>Session History</h3>
+          <div>
+            <input id="filterDate" type="date" />
+            <button id="filterBtn" class="btn">Filter</button>
+            <button id="clearFilter" class="btn">Clear</button>
+          </div>
+        </div>
+
+        <div id="stats" style="margin-top:.75rem;">
+          <strong>Total sessions:</strong> <span id="totalSessions">0</span> |
+          <strong>Total time:</strong> <span id="totalTime">00:00:00</span>
+        </div>
+
+        <div id="historyList" style="margin-top:1rem;"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/stopwatch.js"></script>
+</body>
+</html>
