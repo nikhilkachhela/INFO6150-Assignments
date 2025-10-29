@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bean & Bloom — Brew Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body class="theme--light">
+  <header class="site-header">
+    <nav class="navbar container">
+      <a class="brand" href="index.html">Bean<span>&</span>Bloom</a>
+      <button class="navbar__toggle" aria-expanded="false" aria-controls="nav-menu">☰</button>
+      <ul id="nav-menu" class="navbar__menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="is-active" href="guide.html">Brew Guide</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <header class="page-head">
+      <h1>Brew Guide</h1>
+      <p>Dial in your method with ratios, grind sizes, and timing notes.</p>
+    </header>
+
+    <!-- GRID LAYOUT: methods grid -->
+    <section class="methods-grid">
+      <article class="method" id="pourover">
+        <h2>Pour Over</h2>
+        <ul class="method__meta">
+          <li><strong>Ratio:</strong> 1:16</li>
+          <li><strong>Grind:</strong> Medium-fine</li>
+          <li><strong>Time:</strong> 3–3:30</li>
+        </ul>
+        <p>Bloom 30–45s, then pour in pulses to maintain a steady dome. Aim for a flat bed.</p>
+      </article>
+
+      <article class="method" id="frenchpress">
+        <h2>French Press</h2>
+        <ul class="method__meta">
+          <li><strong>Ratio:</strong> 1:15</li>
+          <li><strong>Grind:</strong> Coarse</li>
+          <li><strong>Time:</strong> 4–5:00</li>
+        </ul>
+        <p>Stir after the initial pour, steep, then plunge gently to avoid over-extraction.</p>
+      </article>
+
+      <article class="method" id="drip">
+        <h2>Auto Drip</h2>
+        <ul class="method__meta">
+          <li><strong>Ratio:</strong> 1:17</li>
+          <li><strong>Grind:</strong> Medium</li>
+          <li><strong>Time:</strong> Machine-dependent</li>
+        </ul>
+        <p>Use fresh filters, rinse the basket, and keep your machine clean for best flavor.</p>
+      </article>
+
+      <article class="method" id="espresso">
+        <h2>Espresso</h2>
+        <ul class="method__meta">
+          <li><strong>Ratio:</strong> 1:2</li>
+          <li><strong>Grind:</strong> Fine</li>
+          <li><strong>Time:</strong> 25–32s</li>
+        </ul>
+        <p>Distribute evenly, level your puck, and adjust grind to hit the target time.</p>
+      </article>
+    </section>
+
+    <!-- FLEX LAYOUT: FAQ -->
+    <section class="faq">
+      <h2>FAQ</h2>
+      <details>
+        <summary>Do I need a scale?</summary>
+        <p>Highly recommended for consistency. Ratios are your friend.</p>
+      </details>
+      <details>
+        <summary>Whole beans vs pre-ground?</summary>
+        <p>Whole beans, ground just before brewing, give the best results.</p>
+      </details>
+      <details>
+        <summary>How do I store coffee?</summary>
+        <p>Airtight container, cool and dark. Avoid the fridge.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> Bean & Bloom</p>
+      <ul class="footer__links">
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.querySelector('.navbar__toggle');
+    const menu = document.getElementById('nav-menu');
+    btn?.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      menu.classList.toggle('open');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

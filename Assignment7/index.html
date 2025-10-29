@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bean & Bloom — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body class="theme--light">
+  <header class="site-header">
+    <nav class="navbar container">
+      <a class="brand" href="index.html">Bean<span>&</span>Bloom</a>
+      <button class="navbar__toggle" aria-expanded="false" aria-controls="nav-menu">☰</button>
+      <ul id="nav-menu" class="navbar__menu">
+        <li><a href="index.html" class="is-active">Home</a></li>
+        <li><a href="guide.html">Brew Guide</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- GRID LAYOUT #1: split hero using CSS Grid -->
+    <section class="hero container">
+      <div class="hero__content">
+        <h1>Find your perfect brew.</h1>
+        <p>From single-origin beans to pro-level brew methods — learn, taste, repeat.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="guide.html">Explore Brew Guide</a>
+          <a class="btn btn--ghost" href="#featured">See Featured Beans</a>
+        </div>
+      </div>
+      <figure class="hero__media">
+        <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=1600&auto=format&fit=crop" alt="Pour over coffee">
+      </figure>
+    </section>
+
+    <!-- GRID LAYOUT #2: card grid -->
+    <section id="featured" class="section container">
+      <header class="section__head">
+        <h2>Featured Beans</h2>
+        <p>Curated roasts with tasting notes and ideal brew methods.</p>
+      </header>
+
+      <div class="card-grid">
+        <article class="card">
+          <div class="card__media">
+            <img src="https://images.unsplash.com/photo-1502462041640-b3d7e50d0660?q=80&w=1400&auto=format&fit=crop" alt="Ethiopia Yirgacheffe">
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Ethiopia Yirgacheffe</h3>
+            <p class="card__text">Floral, citrus, and honey. Perfect for pour over.</p>
+          </div>
+          <footer class="card__footer">
+            <a class="btn btn--pill" href="guide.html#pourover">Pour Over</a>
+            <a class="btn btn--pill" href="#">Details</a>
+          </footer>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?q=80&w=1400&auto=format&fit=crop" alt="Colombia Huila">
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Colombia Huila</h3>
+            <p class="card__text">Caramel sweetness with a balanced body. Great for drip.</p>
+          </div>
+          <footer class="card__footer">
+            <a class="btn btn--pill" href="guide.html#drip">Auto Drip</a>
+            <a class="btn btn--pill" href="#">Details</a>
+          </footer>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?q=80&w=1400&auto=format&fit=crop" alt="Kenya AA">
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Kenya AA</h3>
+            <p class="card__text">Berry brightness with wine-like acidity.</p>
+          </div>
+          <footer class="card__footer">
+            <a class="btn btn--pill" href="guide.html#frenchpress">French Press</a>
+            <a class="btn btn--pill" href="#">Details</a>
+          </footer>
+        </article>
+      </div>
+    </section>
+
+    <!-- FLEX LAYOUT #1: testimonial strip -->
+    <section class="strip">
+      <div class="container strip__content">
+        <p class="eyebrow">What people say</p>
+        <p class="strip__quote">“The clearest brew guide I’ve used. My mornings are officially upgraded.”</p>
+        <p class="strip__by">— Jamie, Boston</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FLEX LAYOUT #2: footer -->
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> Bean & Bloom</p>
+      <ul class="footer__links">
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.querySelector('.navbar__toggle');
+    const menu = document.getElementById('nav-menu');
+    btn?.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      menu.classList.toggle('open');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
