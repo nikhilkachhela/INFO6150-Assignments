@@ -71,12 +71,6 @@ guide.html     ← page 2 (methods grid + flex FAQ)
 ### 6) Documentation
 - This README explains what’s implemented and how to run/compile.
 
-### 7) Submission
-- Push the entire folder to a **private GitHub repo** using your Northeastern email.
-- Upload a **ZIP** of this project to Canvas.
-- Include your GitHub URL in Canvas remarks.
-- Mind timestamps on both GitHub & Canvas to avoid late penalties.
-
 ---
 
 ## Notes for Graders
