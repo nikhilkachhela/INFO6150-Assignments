@@ -1,0 +1,35 @@
+// Variables, maps, and CSS custom props (paired with :root in main)
+$font-sans: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+$font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+
+$colors: (
+  primary: #7a4b2e,
+  primary-600: #5e3822,
+  accent: #c28a5b,
+  ink: #1a1a1a,
+  bg: #fffdfb,
+  muted: #6b7280,
+  surface: #ffffff
+);
+
+$ink: map-get($colors, ink);
+$bg: map-get($colors, bg);
+$radius: 1rem;
+
+$space-scale: (
+  0: 0,
+  1: 4px,
+  2: 8px,
+  3: 12px,
+  4: 16px,
+  5: 24px,
+  6: 32px,
+  7: 48px,
+  8: 64px
+);
+
+$breakpoints: (
+  sm: 480px,
+  md: 768px,
+  lg: 1024px
+);
