@@ -1,0 +1,40 @@
+// Layout: Grid sections
+@use "../utilities/mixins";
+@use "../base/variables";
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: map-get(variables.$space-scale, 7);
+  padding-block: map-get(variables.$space-scale, 7);
+
+  @include mixins.respond-to(md) {
+    grid-template-columns: 1.2fr .8fr;
+    align-items: center;
+  }
+
+  &__content {
+    h1 {
+      font-family: variables.$font-serif;
+      font-size: 3rem;
+      line-height: 1.1;
+      margin: 0 0 .5rem 0;
+    }
+    p { color: map-get(variables.$colors, muted); margin: 0 0 1rem 0; }
+    .hero__actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+  }
+
+  &__media {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.card-grid {
+  display: grid;
+  gap: map-get(variables.$space-scale, 6);
+  grid-template-columns: 1fr;
+
+  @include mixins.respond-to(md) { grid-template-columns: repeat(3, 1fr); }
+}

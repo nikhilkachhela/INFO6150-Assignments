@@ -1,0 +1,31 @@
+// Layout: Flex sections
+@use "../utilities/mixins";
+@use "../base/variables";
+
+.strip {
+  background: map-get(variables.$colors, primary);
+  color: white;
+  padding-block: map-get(variables.$space-scale, 6);
+
+  &__content {
+    @include mixins.flex-center(map-get(variables.$space-scale, 3));
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .eyebrow { text-transform: uppercase; letter-spacing: .08em; opacity: .9; }
+  &__quote { font-weight: 600; font-size: 1.25rem; }
+  &__by { opacity: .9; }
+}
+
+.site-footer {
+  background: #0f0f0f;
+  color: #e5e7eb;
+  padding-block: map-get(variables.$space-scale, 5);
+  a { color: #e5e7eb; }
+  .footer__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: map-get(variables.$space-scale, 4); flex-wrap: wrap;
+  }
+  .footer__links { display: flex; gap: map-get(variables.$space-scale, 3); list-style: none; padding: 0; margin: 0; }
+}
