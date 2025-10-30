@@ -1,0 +1,27 @@
+// Guide page styles
+@use "../utilities/mixins";
+@use "../base/variables";
+
+.page-head { padding-block: 2rem 1rem; }
+.page-head h1 { margin: 0 0 .25rem 0; font-family: variables.$font-serif; }
+
+.methods-grid {
+  display: grid; gap: 1rem;
+  grid-template-columns: 1fr;
+  @include mixins.respond-to(md) { grid-template-columns: repeat(2, 1fr); }
+  @include mixins.respond-to(lg) { grid-template-columns: repeat(4, 1fr); }
+}
+
+.method {
+  background: white; border: 1px solid #eee; border-radius: var(--radius); padding: 1rem; box-shadow: var(--shadow-sm);
+  h2 { margin-top: 0; }
+  &__meta {
+    list-style: none; padding: 0; margin: 0 0 .5rem 0;
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    li { color: map-get(variables.$colors, muted); }
+  }
+}
+
+.faq { padding-block: 2rem 4rem; }
+.faq details { border: 1px solid #eee; border-radius: .75rem; padding: .75rem 1rem; margin-bottom: .75rem; background: #fafafa; }
+.faq summary { font-weight: 600; cursor: pointer; }

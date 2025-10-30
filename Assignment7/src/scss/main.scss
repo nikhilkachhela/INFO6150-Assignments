@@ -1,0 +1,32 @@
+// Main SCSS entrypoint using the Sass module system
+@use "base/variables";
+@use "utilities/functions";
+@use "utilities/mixins";
+@use "utilities/utilities";
+@use "layout/grid";
+@use "layout/flex";
+@use "components/buttons";
+@use "components/cards";
+@use "components/navbar";
+@use "pages/home";
+@use "pages/guide";
+
+/* Expose CSS Custom Properties defined in variables */
+:root {
+  --radius: #{variables.$radius};
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.06);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.10);
+  --container: #{functions.px-to-rem(1200)};
+}
+
+/* Base styles */
+* { box-sizing: border-box; }
+html { font-family: variables.$font-sans; color: variables.$ink; background: variables.$bg; }
+body { margin: 0; line-height: 1.5; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: map-get(variables.$colors, primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container { width: min(100% - 2rem, var(--container)); margin-inline: auto; }
+
+/* Utility classes generated via maps/loops live in utilities */
