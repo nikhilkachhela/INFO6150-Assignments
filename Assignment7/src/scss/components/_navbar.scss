@@ -1,0 +1,36 @@
+// Navbar (Flexbox) + interpolation for state
+@use "../utilities/mixins";
+@use "../base/variables";
+
+.site-header { position: sticky; top: 0; background: rgba(255,255,255,.8); backdrop-filter: blur(6px); border-bottom: 1px solid #eee; z-index: 10; }
+
+.navbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding-block: .75rem;
+
+  .brand { font-family: variables.$font-serif; font-weight: 800; font-size: 1.35rem; color: map-get(variables.$colors, primary); }
+  .brand span { color: map-get(variables.$colors, accent); }
+
+  &__toggle {
+    display: inline-block;
+    background: transparent; border: 1px solid #ddd; border-radius: .5rem; padding: .35rem .5rem; cursor: pointer;
+    @include mixins.respond-to(md) { display: none; }
+  }
+
+  &__menu {
+    list-style: none; margin: 0; padding: 0;
+    display: none; gap: 1rem; align-items: center;
+
+    &.open { display: flex; flex-direction: column; position: absolute; right: 1rem; top: 60px; background: white; padding: .75rem; border: 1px solid #eee; border-radius: .75rem; box-shadow: var(--shadow-md); }
+
+    a {
+      padding: .4rem .6rem; border-radius: .5rem; font-weight: 600; color: variables.$ink;
+      &.is-active { background: #f4f4f5; }
+      &:hover { text-decoration: none; background: #f4f4f5; }
+    }
+
+    @include mixins.respond-to(md) {
+      display: flex; position: static; flex-direction: row; background: transparent; padding: 0; border: 0; box-shadow: none;
+    }
+  }
+}

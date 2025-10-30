@@ -1,0 +1,26 @@
+// Buttons using placeholders, mixins, @extend, and function usage
+@use "../utilities/mixins";
+@use "../utilities/functions";
+@use "../base/variables";
+
+.btn { @extend %btn; }
+
+.btn--primary {
+  background: map-get(variables.$colors, primary);
+  color: white;
+  box-shadow: var(--shadow-sm);
+  &:hover { background: map-get(variables.$colors, primary-600); }
+}
+
+.btn--ghost {
+  background: transparent;
+  color: map-get(variables.$colors, primary);
+  border-color: currentColor;
+}
+
+.btn--pill {
+  @extend %btn;
+  padding: .45rem .75rem;
+  border-radius: 999px;
+  font-size: .9rem;
+}
