@@ -1,0 +1,11 @@
+// Sass functions
+@use "sass:math";
+
+@function px-to-rem($px, $base: 16) {
+  @return math.div($px, $base) * 1rem;
+}
+
+@function color-shade($color, $percent) {
+  // simple shade using rgba overlay
+  @return mix(black, $color, $percent);
+}

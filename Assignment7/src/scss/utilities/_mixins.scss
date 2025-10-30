@@ -1,0 +1,30 @@
+// Mixins and placeholders
+@use "../base/variables";
+
+@mixin respond-to($break) {
+  $val: map-get(variables.$breakpoints, $break);
+  @if $val {
+    @media (min-width: $val) { @content; }
+  } @else {
+    @warn "Unknown breakpoint: #{$break}";
+  }
+}
+
+@mixin flex-center($gap: 0) {
+  display: flex; align-items: center; justify-content: center; gap: $gap;
+}
+
+%card {
+  background: map-get(variables.$colors, surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+%btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: .7rem 1rem; border-radius: calc(var(--radius) / 2);
+  border: 1px solid transparent; font-weight: 600; cursor: pointer;
+  transition: transform .12s ease, box-shadow .2s ease, background-color .2s ease;
+  &:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); text-decoration: none; }
+}
