@@ -1,0 +1,117 @@
+{
+  "openapi": "3.0.0",
+  "info": { "title": "Assignment 8 Users API", "version": "1.0.0" },
+  "servers": [{ "url": "http://localhost:3000" }],
+  "paths": {
+    "/user/create": {
+      "post": {
+        "summary": "Create user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fullName": { "type": "string" },
+                  "email": { "type": "string", "format": "email" },
+                  "password": { "type": "string", "minLength": 8 }
+                },
+                "required": ["fullName","email","password"]
+              },
+              "examples": {
+                "ok": { "value": { "fullName":"John Doe", "email":"john@example.com", "password":"Str0ng@Pass" } }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "User created successfully." },
+          "400": { "description": "Validation failed." }
+        }
+      }
+    },
+    "/user/edit": {
+      "put": {
+        "summary": "Edit user (by email)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "format": "email" },
+                  "fullName": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "User updated successfully." },
+          "400": { "description": "Validation failed." },
+          "404": { "description": "User not found." }
+        }
+      }
+    },
+    "/user/delete": {
+      "delete": {
+        "summary": "Delete user (by email)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "type": "object", "properties": { "email": { "type": "string", "format": "email" } }, "required": ["email"] }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "User deleted successfully." },
+          "404": { "description": "User not found." }
+        }
+      }
+    },
+    "/user/getAll": {
+      "get": {
+        "summary": "Retrieve all users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "application/json": { "schema": { "type": "object", "properties": { "users": { "type": "array", "items": {
+              "type": "object",
+              "properties": { "fullName": { "type": "string" }, "email": { "type": "string" }, "password": { "type": "string" } }
+            } } } } } }
+          }
+        }
+      }
+    },
+    "/user/uploadImage": {
+      "post": {
+        "summary": "Upload one image per user (by email)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "format": "email" },
+                  "image": { "type": "string", "format": "binary" }
+                },
+                "required": ["email","image"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Image uploaded successfully." },
+          "400": { "description": "Invalid file format or Image already exists." },
+          "404": { "description": "User not found." }
+        }
+      }
+    }
+  }
+}
